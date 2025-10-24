@@ -18,17 +18,25 @@
 
 ---
 
-## Kiến trúc hệ thống (Mermaid)
+## Kiến trúc hệ thống
 
 ```mermaid
 graph TD
     A[API Gateway] --> B[Auth Service]
     A --> C[Product Service]
     A --> D[Order Service]
-    A --> E[Payment Service (VNPay/Momo)]
+    A --> E[Payment Service<br/>VNPay/Momo]
     A --> F[Realtime Service]
     D --> G[Kafka]
     G --> F
-    B & C & D & E --> H[PostgreSQL (tenant_id)]
-    F --> I[Redis Pub/Sub]
+    B --> H[(PostgreSQL<br/>tenant_id)]
+    C --> H
+    D --> H
+    E --> H
+    F --> I[(Redis Pub/Sub)]
     J[React PWA] --> A
+
+    classDef service fill:#1E40AF,stroke:#fff,color:#fff
+    classDef db fill:#16A34A,stroke:#fff,color:#fff
+    class A,B,C,D,E,F service
+    class H,I db
